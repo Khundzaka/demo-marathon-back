@@ -117,27 +117,5 @@ describe('api tests', () => {
         });
     });
 
-    describe('socket', () => {
-        let socket1, socket2;
-
-        it('it should connect successfully', (done) => {
-
-            chai.request(app)
-                .post('/api/reset').send({})
-                .end((err, res) => {
-                    store.athletes = res.body.athletes;
-                    res.should.have.status(200);
-                    res.body.status.should.equal("ok");
-
-                    models.Cross.findAll().then((crosses) => {
-                        crosses.should.be.lengthOf(0);
-                        done();
-                    });
-                });
-        });
-    });
-
-
-
 });
 
