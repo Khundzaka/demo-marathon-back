@@ -33,6 +33,4 @@ app.use(function (err, req, res, next) {
 
 io.on('connection', socket(io));
 
-
-
-module.exports = app;
+module.exports = server;

@@ -1,17 +1,19 @@
 const Athlete = require('./models').Athlete;
 const Cross = require('./models').Cross;
 const createError = require('http-errors');
+const emitter = require('./utils/emitter');
 
 async function crossCheckpoint(req, res, next) {
     let athlete = await Athlete.findByPk(req.body.athleteId);
     if (!athlete) {
         return next(createError(400));
     }
-    await Cross.create({
+    let cross = await Cross.create({
         athleteId: athlete.id,
         event: req.body.event,
         time: new Date(),
     });
+    emitter.emit('cross', cross);
     res.send({status: "ok"});
 }
 
@@ -27,6 +29,7 @@ async function fetchAthletes(req, res) {
 
 async function resetProgress(req, res) {
     await Cross.destroy({where: {}});
+    emitter.emit('reset', {});
     res.send({status: "ok"});
 }
 

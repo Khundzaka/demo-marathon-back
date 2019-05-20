@@ -20,7 +20,9 @@ module.exports = {
             athletes.push({
                 firstName: faker.name.firstName(),
                 lastName: faker.name.lastName(),
-                number: i + 1
+                number: i + 1,
+                createdAt: new Date(),
+                updatedAt: new Date()
             });
         }
 

@@ -1,9 +1,27 @@
-const emmiter = require('./utils/emitter');
+const emitter = require('./utils/emitter');
+
+function findClients(io) {
+    const res = [];
+    const ns = io.of("/");
+
+    if (ns) {
+        for (let id in ns.connected) {
+            res.push(ns.connected[id]);
+        }
+    }
+    return res;
+}
 
 module.exports = function (io) {
-    emmiter.on('cross', function (runnerData) {
-        io.sockets.connected.filter(conn => conn.userData.active)
-            .forEach(conn => conn.emit(runnerData))
+    emitter.on('cross', function (crossData) {
+        // console.log(crossData);
+        findClients(io).filter(conn => conn.userData.active)
+            .forEach(conn => conn.emit('cross', crossData))
+    });
+    emitter.on('reset', function (resetData) {
+        // console.log(crossData);
+        findClients(io).filter(conn => conn.userData.active)
+            .forEach(conn => conn.emit('reset', resetData))
     });
 
     return (connection) => {

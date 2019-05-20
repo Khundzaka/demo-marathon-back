@@ -12,8 +12,11 @@
     "http-status": "^1.3.2",
     "pg": "^7.11.0",
     "pg-hstore": "^2.3.2",
+    "request": "latest",
+    "request-promise": "^4.2.4",
     "sequelize": "^5.8.6",
-    "socket.io": "^2.2.0"
+    "socket.io": "^2.2.0",
+    "socket.io-client": "latest"
   },
   "devDependencies": {
     "chai": "^4.2.0",
