@@ -29,7 +29,8 @@
   },
   "scripts": {
     "dev": "nodemon server.js",
-    "test": "mocha test/api-test.js"
+    "test": "mocha test/api-test.js",
+    "client": "nodemon event_creator.js"
   },
   "keywords": [],
   "author": "",
